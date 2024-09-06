@@ -38,6 +38,56 @@ const moveBlock = () => {
         positionY++
         childBlock.style.top = `${positionY}px`;
         requestAnimationFrame(moveBlock)
+    } else if (positionY >= offsetHeight && positionX > 0) {
+        positionX--
+        childBlock.style.left = `${positionX}px`;
+        requestAnimationFrame(moveBlock)
+    } else if (positionX === 0 && positionY > 0) {
+        positionY--
+        childBlock.style.top = `${positionY}px`;
+        requestAnimationFrame(moveBlock)
     }
 }
 moveBlock()
+
+
+
+// Stopwatch
+
+let counter = 0;
+let intervalId;
+let isRunning = false;
+
+const secondsDisplay = document.getElementById('seconds');
+const startButton = document.getElementById('start');
+const stopButton = document.getElementById('stop');
+const resetButton = document.getElementById('reset');
+
+const updateCounterDisplay = () => {
+    secondsDisplay.textContent = counter;
+};
+
+const startCounter = () => {
+    if (!isRunning) {
+        isRunning = true;
+        intervalId = setInterval(() => {
+            counter++;
+            updateCounterDisplay();
+        }, 1000);
+    }
+};
+
+const stopCounter = () => {
+    clearInterval(intervalId);
+    isRunning = false;
+};
+
+const resetCounter = () => {
+    stopCounter();
+    counter = 0;
+    updateCounterDisplay();
+};
+
+startButton.addEventListener('click', startCounter);
+stopButton.addEventListener('click', stopCounter);
+resetButton.addEventListener('click', resetCounter);
