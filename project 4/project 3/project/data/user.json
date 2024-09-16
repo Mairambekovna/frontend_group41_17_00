@@ -1,0 +1,7 @@
+{
+  "name": "John",
+  "age": 30,
+  "city": "New York",
+  "languages": ["English", "Spanish"],
+  "active": true
+}
